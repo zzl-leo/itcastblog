@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <style>
+        .container{
+            margin: 0 auto;
+            width: 40%;
+        }
+
+        .container h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>注册页面</h1>
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" id="username" placeholder="用户名">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="pwd" id="pwd" placeholder="密码">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="nickname" id="nickname" placeholder="昵称">
+            </div>
+
+            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+            <button type="button" class="btn btn-primary btn-lg btn-block">注册新用户</button>
+        </form>
+    </div>
+
+    <script>
+        $('.btn').on('click',function(){
+            // 获取注册信息
+            var username = $('#username').val();
+            var pwd = $('#pwd').val();
+            var nickname = $('#nickname').val();
+            
+            $.ajax({
+                type:'post',
+                url:'http://127.0.0.1:3002/api/register',
+                dataType:'json',
+                data:{
+                    username:username,
+                    nickname:nickname,
+                    pwd:pwd
+                },
+                success:function(res){
+                    // console.log(res);
+                    if(res.err_code != 0){
+                        alert('注册成功');
+                        location.href = '';
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
